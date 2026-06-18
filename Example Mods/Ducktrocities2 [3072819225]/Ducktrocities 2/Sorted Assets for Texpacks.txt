@@ -1,0 +1,12 @@
+Up-to-date Documentation: https://www.reddit.com/r/duckgame/comments/mkua4q/sorted_assets_for_retextures/
+
+Since [2021-05-31] patch, ReTextures are now called TexPacks (and ReSkins refer to Duck Skin edits, an extenstion of Custom Hats).
+I think we can agree that `Duck Game\Content` folder is quite messy. And you might not be interested in making a TexPack for every bit of the game, like small icons or Cutting Floor sprites.
+So I encourage you to use this instead: Download Link [2021-04]
+And then apply it to Maps'n'Hats Modpack Template for purpose of uploading it to Workshop, which also supports TexPacks.
+Audio folder is also sorted (TexPack also allows swapping `.wav` SFX and `.ogg` music files). Be sure to read all `.txt` files you might find.
+Brute-Force TexPacks: It's possible to overwrite original assets in game files folder. "Brute-Forcing" TexPack like that should be performed with player's consent, because to uninstall a Brute-Force TexPack he'll have to "Repair Local Game Files" using Steam. Why would you Brute-Force a TexPack? So you can modify Arcade maps. In order to do that, copy maps you wish to edit into Level Editor directory, "Save As New" once edited, and open both original and edited file with Notepad++.exe, and replace the edited map's "Unique ID" with the one from original Arcade map.
+As for HD TexPacks, some assets don't support "scalling", which is something to note when browsing through assets to upscale. Those are:
+- flags.png; steamIcon.png (Probably everything related to User Interface)
+- Hats
+- Tile Backgrounds/Blocks/Platforms (Parallax backgrounds support upscalling)

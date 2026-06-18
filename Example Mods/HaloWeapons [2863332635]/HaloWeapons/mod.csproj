@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}</ProjectGuid>
+    <LangVersion>latest</LangVersion>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DuckGame.HaloWeapons</RootNamespace>
+    <AssemblyName>HaloWeapons</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>.\</OutputPath>
+    <BaseIntermediateOutputPath>build\obj</BaseIntermediateOutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>.\</OutputPath>
+    <BaseIntermediateOutputPath>build\obj</BaseIntermediateOutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>content\DLLs\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="DuckGame">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Duck Game\DuckGame.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Content.Pipeline">
+      <HintPath>content\DLLs\Microsoft.Xna.Framework.Content.Pipeline.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Game\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Game.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Windows\Microsoft.NET\assembly\GAC_32\Microsoft.Xna.Framework.Graphics\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Graphics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>content\DLLs\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RUDE">
+      <HintPath>content\DLLs\RUDE.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="XnaContentProvider">
+      <HintPath>content\DLLs\XnaContentProvider.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\AmmoTypes\ATBR75.cs" />
+    <Compile Include="src\AmmoTypes\ATCindershot.cs" />
+    <Compile Include="src\AmmoTypes\ATHeatWave.cs" />
+    <Compile Include="src\AmmoTypes\ATMA40.cs" />
+    <Compile Include="src\AmmoTypes\ATMangler.cs" />
+    <Compile Include="src\AmmoTypes\ATHomingBullet.cs" />
+    <Compile Include="src\AmmoTypes\ATPulseCarbine.cs" />
+    <Compile Include="src\AmmoTypes\ATRavagerCharged.cs" />
+    <Compile Include="src\AmmoTypes\ATRavager.cs" />
+    <Compile Include="src\AmmoTypes\ATReboundBullet.cs" />
+    <Compile Include="src\AmmoTypes\ATSpikeGrenadeSharpnel.cs" />
+    <Compile Include="src\Bullets\CindershotBullet.cs" />
+    <Compile Include="src\Bullets\HomingBullet.cs" />
+    <Compile Include="src\Bullets\PulseBullet.cs" />
+    <Compile Include="src\NetMessages\NMSpikeGrenadeStick.cs" />
+    <Compile Include="src\Other\Compatibility\CorptronLogoInitializePatched.cs" />
+    <Compile Include="src\Other\DuckResetNonServerDeathStatePatched.cs" />
+    <Compile Include="src\NetMessages\NMEnergyBeam.cs" />
+    <Compile Include="src\NetMessages\NMHeatWaveFire.cs" />
+    <Compile Include="src\NetMessages\NMThrusterStartBoosting.cs" />
+    <Compile Include="src\Other\Compatibility\ModInteractions.cs" />
+    <Compile Include="src\Other\GunGameLevelAttribute.cs" />
+    <Compile Include="src\Particles\DropWallParticle.cs" />
+    <Compile Include="src\Particles\FadingParticle.cs" />
+    <Compile Include="src\Particles\GlassParticle.cs" />
+    <Compile Include="src\Particles\NeedlerSpike.cs" />
+    <Compile Include="src\Particles\SpikeGrenadePin.cs" />
+    <Compile Include="src\Equipment\Thruster.cs" />
+    <Compile Include="src\Guns\BR75.cs" />
+    <Compile Include="src\Guns\BurstingWeapon.cs" />
+    <Compile Include="src\Guns\Cindershot.cs" />
+    <Compile Include="src\Guns\EnergySword.cs" />
+    <Compile Include="src\Guns\HaloGrenade.cs" />
+    <Compile Include="src\Guns\HeatWave.cs" />
+    <Compile Include="src\Guns\ImpulseGrenade.cs" />
+    <Compile Include="src\Guns\MA40.cs" />
+    <Compile Include="src\Guns\Needler.cs" />
+    <Compile Include="src\Guns\PulseCarbine.cs" />
+    <Compile Include="src\Guns\Ravager.cs" />
+    <Compile Include="src\Guns\SentinelBeam.cs" />
+    <Compile Include="src\Guns\ShockRifle.cs" />
+    <Compile Include="src\Guns\SpikeGrenade.cs" />
+    <Compile Include="src\Main\Core.cs" />
+    <Compile Include="src\Other\LevelClearPatched.cs" />
+    <Compile Include="src\Materials\MaterialCamo.cs" />
+    <Compile Include="src\Materials\MaterialPaintBucket.cs" />
+    <Compile Include="src\Materials\SpriteDrawPatched.cs" />
+    <Compile Include="src\Materials\SpriteMapDrawPatched.cs" />
+    <Compile Include="src\Materials\SpriteMapDrawWithoutUpdatePatched.cs" />
+    <Compile Include="src\Materials\SpriteMaterials.cs" />
+    <Compile Include="src\NetMessages\NMActivateCamo.cs" />
+    <Compile Include="src\NetMessages\NMEnergySwordNoAmmo.cs" />
+    <Compile Include="src\NetMessages\NMRedFire.cs" />
+    <Compile Include="src\NetMessages\NMSetNeedlerTarget.cs" />
+    <Compile Include="src\NetMessages\NMSetSkin.cs" />
+    <Compile Include="src\Other\AssemblyResolver.cs" />
+    <Compile Include="src\Other\EditorGroups.cs" />
+    <Compile Include="src\Other\Extensions.cs" />
+    <Compile Include="src\Guns\HaloWeapon.cs" />
+    <Compile Include="src\Main\HaloWeapons.cs" />
+    <Compile Include="src\Guns\Mangler.cs" />
+    <Compile Include="src\Other\Options\Options.cs" />
+    <Compile Include="src\Other\Options\OptionsData.cs" />
+    <Compile Include="src\Other\Utilities.cs" />
+    <Compile Include="src\Props\ActiveCamo.cs" />
+    <Compile Include="src\Props\DropWall.cs" />
+    <Compile Include="src\Skins\NoSkinsAttribute.cs" />
+    <Compile Include="src\Other\Resources.cs" />
+    <Compile Include="src\Skins\DuckKillPatched.cs" />
+    <Compile Include="src\Other\MonoMainKillEverythingPatched.cs" />
+    <Compile Include="src\Skins\PlusOneInitializePatched.cs" />
+    <Compile Include="src\Skins\RockScoreboardInitializePatched.cs" />
+    <Compile Include="src\Skins\Skin.cs" />
+    <Compile Include="src\Skins\Skins.cs" />
+    <Compile Include="src\Skins\SkinsData.cs" />
+    <Compile Include="src\Skins\TeamSelect2InitializePatched.cs" />
+    <Compile Include="src\Skins\TitleScreenInitializePatched.cs" />
+    <Compile Include="src\StateBindingAttributes\GhostObjectMaskIsMaxValuePatched.cs" />
+    <Compile Include="src\StateBindingAttributes\GhostObjectReadMaskPatched.cs" />
+    <Compile Include="src\StateBindingAttributes\GhostObjectReadMinimalStateMaskPatched.cs" />
+    <Compile Include="src\Stuff\Beams\Beam.cs" />
+    <Compile Include="src\Stuff\Beams\BeamHitParticle.cs" />
+    <Compile Include="src\Stuff\Beams\EnergyBeam.cs" />
+    <Compile Include="src\Stuff\DropWallBase.cs" />
+    <Compile Include="src\Stuff\DropWallTile.cs" />
+    <Compile Include="src\Stuff\RedFire\RedFire.cs" />
+    <Compile Include="src\Stuff\RedFire\SmallFireUpdatePatched.cs" />
+    <Compile Include="src\Stuff\SyncedPositionBlock.cs" />
+    <Compile Include="src\Stuff\Things\Camo.cs" />
+    <Compile Include="src\Stuff\Things\FadingCircle.cs" />
+    <Compile Include="src\Other\Paths.cs" />
+    <Compile Include="src\StateBindingAttributes\BindingAttribute.cs" />
+    <Compile Include="src\StateBindingAttributes\FloatBindingAttribute.cs" />
+    <Compile Include="src\StateBindingAttributes\Vec2BindingAttribute.cs" />
+    <Compile Include="src\StateBindingAttributes\GhostObjectConstructorPatched.cs" />
+    <Compile Include="src\StateBindingAttributes\SoundBindingAttribute.cs" />
+    <Compile Include="src\StateBindingAttributes\BindingAttributes.cs" />
+    <Compile Include="src\Stuff\IFadingThing.cs" />
+    <Compile Include="src\Stuff\IHomingWeapon.cs" />
+    <Compile Include="src\Stuff\ITimerThing.cs" />
+    <Compile Include="src\Stuff\Beams\LightBeam.cs" />
+    <Compile Include="src\Stuff\Things\PulseBulletLighting.cs" />
+    <Compile Include="src\Main\Updater.cs" />
+    <Compile Include="src\VisualElements\BackgroundMetalPlate.cs" />
+    <Compile Include="src\VisualElements\BreakerTileset.cs" />
+    <Compile Include="src\VisualElements\Crossbeams.cs" />
+    <Compile Include="src\VisualElements\DesertBackground.cs" />
+    <Compile Include="src\VisualElements\HaloAutoPlatform.cs" />
+    <Compile Include="src\VisualElements\HaloBackground.cs" />
+    <Compile Include="src\VisualElements\HaloBackgroundTile.cs" />
+    <Compile Include="src\VisualElements\HaloTileset.cs" />
+    <Compile Include="src\UI\CreditDisplays\CireditDisplayUIComponent.cs" />
+    <Compile Include="src\UI\CreditDisplays\CreditDisplay.cs" />
+    <Compile Include="src\UI\CreditDisplays\CreditFlyAwayDisplay.cs" />
+    <Compile Include="src\UI\CreditDisplays\CreditIncreaseDisplay.cs" />
+    <Compile Include="src\UI\DuckNetworkOpenMenuPatched.cs" />
+    <Compile Include="src\UI\UISkinTile.cs" />
+    <Compile Include="src\UI\UITile.cs" />
+    <Compile Include="src\UI\UITileMenu.cs" />
+    <Compile Include="src\UI\UIMenuGray.cs" />
+    <Compile Include="src\UI\TeamSelect2BuildPauseMenuPatched.cs" />
+    <Compile Include="src\UI\UI.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

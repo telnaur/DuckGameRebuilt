@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CED6970B-E777-4F84-9DB5-D91E27C7D1A3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyMod</RootNamespace>
+    <AssemblyName>MyMod</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>.\</OutputPath>
+    <BaseIntermediateOutputPath>build\obj</BaseIntermediateOutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>.\</OutputPath>
+    <BaseIntermediateOutputPath>build\obj</BaseIntermediateOutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DuckGame">
+      <HintPath>D:\Program Files (x86)\Steam\steamapps\common\Duck Game\DuckGame.exe</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\Mod.cs" />
+    <Compile Include="src\Settings\New Settings\DCColorShift.cs" />
+    <Compile Include="src\Settings\New Settings\DCDartStorm.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCColorShift2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCDartStorm2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCRocketShower2.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXMineParty.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXNetCity.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXPresentExplosion.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXRomanCandle.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXSwordAdvenure.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCBananaParty2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCBulletHell2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCEarthquake2.cs" />
+    <Compile Include="src\Settings\New Settings\DCEarthquake.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCExplodeFire2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCGasFire2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCGrenadeParty2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCIonCannon2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCMineParty2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCNetCity2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCPresentExplosion2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCRomanCandle2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCSwordAdventure2.cs" />
+    <Compile Include="src\Settings\Second Edition Settings\DCTeleport2.cs" />
+    <Compile Include="src\Settings\New Settings\DCTeleport.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXBananaParty.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXBulletHell.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXExplodeFire.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXGasFire.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXGrenadeParty.cs" />
+    <Compile Include="src\Settings\Xtreme Settings\DCXIonCannon.cs" />
+    <Compile Include="src\Stuff\Crates\ExtremeBottomCrate.cs" />
+    <Compile Include="src\Stuff\Crates\ExtremeCrate.cs" />
+    <Compile Include="src\Stuff\Crates\BottomCrate.cs" />
+    <Compile Include="src\Stuff\Crates\SpecifiedBottomCrate.cs" />
+    <Compile Include="src\Stuff\Crates\SpecifiedCrate.cs" />
+    <Compile Include="src\Settings\New Settings\DCRocketShower.cs" />
+    <Content Include="src\_PresetForDeathCrateSettings.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="src\_SettingIDs.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

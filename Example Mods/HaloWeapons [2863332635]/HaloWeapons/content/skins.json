@@ -1,0 +1,761 @@
+{
+  "pulsecarbine":  {
+    "width": 30,
+    "height": 11,
+    "skins":  [
+      {
+        "name": "Saturated Red",
+        "filename": "saturatedRed",
+        "cost": 200
+      },
+      {
+        "name": "Spacestation",
+        "filename": "spacestation",
+        "cost": 200
+      },
+      {
+        "name": "Bright Horizon",
+        "filename": "brightHorizon",
+        "cost": 200
+      },
+      {
+        "name": "Glass Hound",
+        "filename": "glassHound",
+        "cost": 300
+      },
+      {
+        "name": "Zeta Sky",
+        "filename": "zetaSky",
+        "cost": 300
+      },
+      {
+        "name": "Verglas Memory",
+        "filename": "verglasMemory",
+        "cost": 300
+      },
+      {
+        "name": "Neon Steel",
+        "filename": "neonSteel",
+        "cost": 300
+      },
+      {
+        "name": "Deathly Poison",
+        "filename": "deathlyPoison",
+        "cost": 450
+      },
+      {
+        "name": "Nocturne Star",
+        "filename": "nocturneStar",
+        "cost": 450
+      },
+      {
+        "name": "Platinum Anniversary",
+        "filename": "platinumAnniversary",
+        "cost": 600
+      },
+      {
+        "name": "Electric Bubblegum",
+        "filename": "electricBubblegum",
+        "cost": 600
+      },
+      {
+        "name": "ANZ Launch",
+        "filename": "anzLaunch",
+        "cost": 800
+      },
+      {
+        "name": "Perfect Detail",
+        "filename": "perfectDetail",
+        "cost": 800
+      }
+    ]
+  },
+
+  "br75":  {
+    "width": 25,
+    "height": 12,
+    "skins":  [
+      {
+        "name": "C2: Australia",
+        "filename": "C2Australia",
+        "cost": 200
+      },
+      {
+        "name": "C2: Gaming",
+        "filename": "C2Gaming",
+        "cost": 200
+      },
+      {
+        "name": "Bright Horizon",
+        "filename": "brightHorizon",
+        "cost": 200
+      },
+      {
+        "name": "Pretorian Wind",
+        "filename": "pretorianWind",
+        "cost": 300
+      },
+      {
+        "name": "Honk",
+        "filename": "honk",
+        "cost": 300
+      },
+      {
+        "name": "Gold",
+        "filename": "gold",
+        "cost": 300
+      },
+      {
+        "name": "Dark",
+        "filename": "dark",
+        "cost": 300
+      },
+      {
+        "name": "HCS",
+        "filename": "hcs",
+        "cost": 450
+      },
+      {
+        "name": "Neon Cool",
+        "filename": "neonCool",
+        "cost": 450
+      },
+      {
+        "name": "Wood",
+        "filename": "wood",
+        "cost": 450
+      },
+      {
+        "name": "Ice",
+        "filename": "ice",
+        "cost": 600
+      },
+      {
+        "name": "Flashing Fjord",
+        "filename": "flashingFjord",
+        "cost": 600
+      },
+      {
+        "name": "Europe",
+        "filename": "europe",
+        "cost": 600
+      },
+      {
+        "name": "Power Rainbow",
+        "filename": "powerRainbow",
+        "cost": 800
+      },
+      {
+        "name": "Snow Wisper",
+        "filename": "snowWisper",
+        "cost": 800
+      }
+    ]
+  },
+
+  "heatwave":  {
+    "width": 30,
+    "height": 9,
+    "skins":  [
+      {
+        "name": "Spacestation",
+        "filename": "spacestation",
+        "cost": 200
+      },
+      {
+        "name": "Bright Horizon",
+        "filename": "brightHorizon",
+        "cost": 200
+      },
+      {
+        "name": "Black Cat",
+        "filename": "blackCat",
+        "cost": 200
+      },
+      {
+        "name": "Glass Hound",
+        "filename": "glassHound",
+        "cost": 300
+      },
+      {
+        "name": "Zeta Sky",
+        "filename": "zetaSky",
+        "cost": 300
+      },
+      {
+        "name": "Sol Devil",
+        "filename": "solDevil",
+        "cost": 300
+      },
+      {
+        "name": "Lilac Steel",
+        "filename": "lilacSteel",
+        "cost": 300
+      },
+      {
+        "name": "HCS",
+        "filename": "hcs",
+        "cost": 450
+      },
+      {
+        "name": "Whispered Sky",
+        "filename": "whisperedSky",
+        "cost": 450
+      },
+      {
+        "name": "Nocturne Star",
+        "filename": "nocturneStar",
+        "cost": 450
+      },
+      {
+        "name": "Platinum Anniversary",
+        "filename": "platinumAnniversary",
+        "cost": 600
+      }, 
+      {
+        "name": "Electric Bubblegum",
+        "filename": "electricBubblegum",
+        "cost": 600
+      }, 
+      {
+        "name": "Neon Superfly",
+        "filename": "neonSuperfly",
+        "cost": 800
+      }, 
+      {
+        "name": "Dart Blaster",
+        "filename": "dartBlaster",
+        "cost": 800
+      }
+    ]
+  },
+
+  "mangler":  {
+    "width": 18,
+    "height": 17,
+    "skins":  [
+      {
+        "name": "Saturated Red",
+        "filename": "saturatedRed",
+        "cost": 200
+      },
+      {
+        "name": "Spacestation",
+        "filename": "spacestation",
+        "cost": 200
+      },
+      {
+        "name": "Bright Horizon",
+        "filename": "brightHorizon",
+        "cost": 200
+      },
+      {
+        "name": "Glass Hound",
+        "filename": "glassHound",
+        "cost": 300
+      },
+      {
+        "name": "Zeta Sky",
+        "filename": "zetaSky",
+        "cost": 300
+      },
+      {
+        "name": "Verglas Memory",
+        "filename": "verglasMemory",
+        "cost": 300
+      },
+      {
+        "name": "Neon Steel",
+        "filename": "neonSteel",
+        "cost": 300
+      },
+      {
+        "name": "Deathly Poison",
+        "filename": "deathlyPoison",
+        "cost": 450
+      },
+      {
+        "name": "Nocturne Star",
+        "filename": "nocturneStar",
+        "cost": 450
+      },
+      {
+        "name": "Platinum Anniversary",
+        "filename": "platinumAnniversary",
+        "cost": 600
+      },
+      {
+        "name": "Electric Bubblegum",
+        "filename": "electricBubblegum",
+        "cost": 600
+      },
+      {
+        "name": "ANZ Launch",
+        "filename": "anzLaunch",
+        "cost": 800
+      },
+      {
+        "name": "Perfect Detail",
+        "filename": "perfectDetail",
+        "cost": 800
+      }
+    ]
+  },
+
+  "needler":  {
+    "width": 19,
+    "height": 16,
+    "skins":  [
+      {
+        "name": "Spacestation",
+        "filename": "spacestation",
+        "cost": 200
+      },
+      {
+        "name": "Bright Horizon",
+        "filename": "brightHorizon",
+        "cost": 200
+      },
+      {
+        "name": "Black Cat",
+        "filename": "blackCat",
+        "cost": 200
+      },
+      {
+        "name": "Glass Hound",
+        "filename": "glassHound",
+        "cost": 300
+      },
+      {
+        "name": "Zeta Sky",
+        "filename": "zetaSky",
+        "cost": 300
+      },
+      {
+        "name": "Sol Devil",
+        "filename": "solDevil",
+        "cost": 300
+      },
+      {
+        "name": "Lilac Steel",
+        "filename": "lilacSteel",
+        "cost": 300
+      },
+      {
+        "name": "HCS",
+        "filename": "hcs",
+        "cost": 450
+      },
+      {
+        "name": "Whispered Sky",
+        "filename": "whisperedSky",
+        "cost": 450
+      },
+      {
+        "name": "Fnatic",
+        "filename": "fnatic",
+        "cost": 200
+      },
+      {
+        "name": "Nocturne Star",
+        "filename": "nocturneStar",
+        "cost": 450
+      },
+      {
+        "name": "Platinum Anniversary",
+        "filename": "platinumAnniversary",
+        "cost": 600
+      }, 
+      {
+        "name": "Electric Bubblegum",
+        "filename": "electricBubblegum",
+        "cost": 600
+      }, 
+      {
+        "name": "Neon Superfly",
+        "filename": "neonSuperfly",
+        "cost": 800
+      }, 
+      {
+        "name": "Dart Blaster",
+        "filename": "dartBlaster",
+        "cost": 800
+      }
+    ]
+  },
+
+  "sentinelbeam":  {
+    "width": 24,
+    "height": 15,
+    "skins":  [
+      {
+        "name": "Memories Of Ice",
+        "filename": "memoriesOfIce",
+        "cost": 200
+      },
+      {
+        "name": "HSC Launch",
+        "filename": "hcsLaunch",
+        "cost": 200
+      },
+      {
+        "name": "Watchdog",
+        "filename": "watchdog",
+        "cost": 200
+      },
+      {
+        "name": "Pop",
+        "filename": "pop",
+        "cost": 300
+      },
+      {
+        "name": "Glass Hound",
+        "filename": "glassHound",
+        "cost": 300
+      },
+      {
+        "name": "Zeta Sky",
+        "filename": "zetaSky",
+        "cost": 300
+      },
+      {
+        "name": "HCS",
+        "filename": "hcs",
+        "cost": 450
+      },
+      {
+        "name": "Whispered Sky",
+        "filename": "whisperedSky",
+        "cost": 450
+      },
+      {
+        "name": "Setting Sun",
+        "filename": "settingSun",
+        "cost": 450
+      },
+      {
+        "name": "Electric Bubblegum",
+        "filename": "electricBubblegum",
+        "cost": 600
+      },
+      {
+        "name": "Peppermint Laughter",
+        "filename": "peppermintLaughter",
+        "cost": 600
+      },
+      {
+        "name": "Adrenal",
+        "filename": "adrenal",
+        "cost": 600
+      },
+      {
+        "name": "Pass Tense",
+        "filename": "passTense",
+        "cost": 800
+      },
+      {
+        "name": "Neon Superfly",
+        "filename": "neonSuperfly",
+        "cost": 800
+      }
+    ]
+  },
+
+  "shockrifle":  {
+    "width": 30,
+    "height": 14,
+    "skins":  [
+      {
+        "name": "Saturated Red",
+        "filename": "saturatedRed",
+        "cost": 200
+      },
+      {
+        "name": "Spacestation",
+        "filename": "spacestation",
+        "cost": 200
+      },
+      {
+        "name": "Bright Horizon",
+        "filename": "brightHorizon",
+        "cost": 200
+      },
+      {
+        "name": "Glass Hound",
+        "filename": "glassHound",
+        "cost": 300
+      },
+      {
+        "name": "Zeta Sky",
+        "filename": "zetaSky",
+        "cost": 300
+      },
+      {
+        "name": "Verglas Memory",
+        "filename": "verglasMemory",
+        "cost": 300
+      },
+      {
+        "name": "Neon Steel",
+        "filename": "neonSteel",
+        "cost": 300
+      },
+      {
+        "name": "Deathly Poison",
+        "filename": "deathlyPoison",
+        "cost": 450
+      },
+      {
+        "name": "Nocturne Star",
+        "filename": "nocturneStar",
+        "cost": 450
+      },
+      {
+        "name": "Platinum Anniversary",
+        "filename": "platinumAnniversary",
+        "cost": 600
+      },
+      {
+        "name": "Electric Bubblegum",
+        "filename": "electricBubblegum",
+        "cost": 600
+      },
+      {
+        "name": "ANZ Launch",
+        "filename": "anzLaunch",
+        "cost": 800
+      },
+      {
+        "name": "Perfect Detail",
+        "filename": "perfectDetail",
+        "cost": 800
+      }
+    ]
+  },
+
+  "ravager": {
+    "width": 27,
+    "height": 12,
+    "skins": [
+        {
+          "name": "Adrenal",
+          "filename": "adrenal",
+          "cost": 200
+        },
+        {
+          "name": "Bright Horizon",
+          "filename": "brightHorizon",
+          "cost": 200
+        },
+        {
+          "name": "Black Cat",
+          "filename": "blackCat",
+          "cost": 200
+        },
+        {
+          "name": "Glass Hound",
+          "filename": "glassHound",
+          "cost": 300
+        },
+        {
+          "name": "Zeta Sky",
+          "filename": "zetaSky",
+          "cost": 300
+        },
+        {
+          "name": "Sol Devil",
+          "filename": "solDevil",
+          "cost": 300
+        },
+        {
+          "name": "Lilac Steel",
+          "filename": "lilacSteel",
+          "cost": 300
+        },
+        {
+          "name": "HCS",
+          "filename": "hcs",
+          "cost": 450
+        },
+        {
+          "name": "Whispered Sky",
+          "filename": "whisperedSky",
+          "cost": 450
+        },
+        {
+          "name": "Nocturne Star",
+          "filename": "nocturneStar",
+          "cost": 450
+        },
+        {
+          "name": "Platinum Anniversary",
+          "filename": "platinumAnniversary",
+          "cost": 600
+        }, 
+        {
+          "name": "Electric Bubblegum",
+          "filename": "electricBubblegum",
+          "cost": 600
+        }, 
+        {
+          "name": "Neon Superfly",
+          "filename": "neonSuperfly",
+          "cost": 800
+        }, 
+        {
+          "name": "Dart Blaster",
+          "filename": "dartBlaster",
+          "cost": 800
+        }
+      ]
+  }, 
+
+  "ma40": {
+    "width": 30,
+    "height": 13,
+    "skins": [
+      {
+        "name": "Spacestation",
+        "filename": "spacestation",
+        "cost": 200
+      },
+      {
+        "name": "Bright Horizon",
+        "filename": "brightHorizon",
+        "cost": 200
+      },
+      {
+        "name": "Black Cat",
+        "filename": "blackCat",
+        "cost": 200
+      },
+      {
+        "name": "Glass Hound",
+        "filename": "glassHound",
+        "cost": 300
+      },
+      {
+        "name": "Zeta Sky",
+        "filename": "zetaSky",
+        "cost": 300
+      },
+      {
+        "name": "Sol Devil",
+        "filename": "solDevil",
+        "cost": 300
+      },
+      {
+        "name": "Lilac Steel",
+        "filename": "lilacSteel",
+        "cost": 300
+      },
+      {
+        "name": "HCS",
+        "filename": "hcs",
+        "cost": 450
+      },
+      {
+        "name": "Whispered Sky",
+        "filename": "whisperedSky",
+        "cost": 450
+      },
+      {
+        "name": "Nocturne Star",
+        "filename": "nocturneStar",
+        "cost": 450
+      },
+      {
+        "name": "Platinum Anniversary",
+        "filename": "platinumAnniversary",
+        "cost": 600
+      }, 
+      {
+        "name": "Electric Bubblegum",
+        "filename": "electricBubblegum",
+        "cost": 600
+      }, 
+      {
+        "name": "Neon Superfly",
+        "filename": "neonSuperfly",
+        "cost": 800
+      }, 
+      {
+        "name": "Dart Blaster",
+        "filename": "dartBlaster",
+        "cost": 800
+      }
+    ]
+  },
+
+  "cindershot": {
+    "width": 28,
+    "height": 10,
+    "skins": [
+      {
+        "name": "Saturated Red",
+        "filename": "saturatedRed",
+        "cost": 200
+      },
+      {
+        "name": "Spacestation",
+        "filename": "spacestation",
+        "cost": 200
+      },
+      {
+        "name": "Bright Horizon",
+        "filename": "brightHorizon",
+        "cost": 200
+      },
+      {
+        "name": "Glass Hound",
+        "filename": "glassHound",
+        "cost": 300
+      },
+      {
+        "name": "Zeta Sky",
+        "filename": "zetaSky",
+        "cost": 300
+      },
+      {
+        "name": "Verglas Memory",
+        "filename": "verglasMemory",
+        "cost": 300
+      },
+      {
+        "name": "Neon Steel",
+        "filename": "neonSteel",
+        "cost": 300
+      },
+      {
+        "name": "Deathly Poison",
+        "filename": "deathlyPoison",
+        "cost": 450
+      },
+      {
+        "name": "Nocturne Star",
+        "filename": "nocturneStar",
+        "cost": 450
+      },
+      {
+        "name": "Platinum Anniversary",
+        "filename": "platinumAnniversary",
+        "cost": 600
+      },
+      {
+        "name": "Electric Bubblegum",
+        "filename": "electricBubblegum",
+        "cost": 600
+      },
+      {
+        "name": "ANZ Launch",
+        "filename": "anzLaunch",
+        "cost": 800
+      },
+      {
+        "name": "Perfect Detail",
+        "filename": "perfectDetail",
+        "cost": 800
+      }
+    ]
+  }
+}

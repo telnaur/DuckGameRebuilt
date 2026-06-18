@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyMod</RootNamespace>
+    <AssemblyName>MyMod</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DuckGame">
+      <HintPath>E:\Steam\SteamApps\common\Duck Game\DuckGame.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\airhorn.cs" />
+    <Compile Include="src\ATblueLaser.cs" />
+    <Compile Include="src\ATCannon.cs" />
+    <Compile Include="src\ATFlower.cs" />
+    <Compile Include="src\ATnail.cs" />
+    <Compile Include="src\ATSeeker.cs" />
+    <Compile Include="src\ATShotgunBad.cs" />
+    <Compile Include="src\ATtext5.cs" />
+    <Compile Include="src\ATwizard.cs" />
+    <Compile Include="src\awp.cs" />
+    <Compile Include="src\badMagnum.cs" />
+    <Compile Include="src\bananaMine.cs" />
+    <Compile Include="src\bigIceWedge.cs" />
+    <Compile Include="src\bigShrekSmoke.cs" />
+    <Compile Include="src\blockHat.cs" />
+    <Compile Include="src\blueLaserBullet.cs" />
+    <Compile Include="src\blueScreen.cs" />
+    <Compile Include="src\bomberBomb.cs" />
+    <Compile Include="src\boomChestPlate.cs" />
+    <Compile Include="src\curseBanana.cs" />
+    <Compile Include="src\curseBody.cs" />
+    <Compile Include="src\curseShotgun.cs" />
+    <Compile Include="src\DCNailArmaggedon.cs" />
+    <Compile Include="src\DCWizardSpell.cs" />
+    <Compile Include="src\doritoSmoke.cs" />
+    <Compile Include="src\ATShrek.cs" />
+    <Compile Include="src\ATShrekShrapnel.cs" />
+    <Compile Include="src\duckEgg.cs" />
+    <Compile Include="src\duelingMagnum.cs" />
+    <Compile Include="src\ejectedSeekerMagazine.cs" />
+    <Compile Include="src\fingerStick.cs" />
+    <Compile Include="src\fnFal.cs" />
+    <Compile Include="src\greySpringPurple.cs" />
+    <Compile Include="src\nailBomb.cs" />
+    <Compile Include="src\NMWizardStaffChoose.cs" />
+    <Compile Include="src\PirateCannon.cs" />
+    <Compile Include="src\plumberHat.cs" />
+    <Compile Include="src\wizardStaffDebris.cs" />
+    <Compile Include="src\potionEffect.cs" />
+    <Compile Include="src\railCross.cs" />
+    <Compile Include="src\railLights.cs" />
+    <Compile Include="src\redEyeEye.cs" />
+    <Compile Include="src\redEyeFlower.cs" />
+    <Compile Include="src\redEyeBean.cs" />
+    <Compile Include="src\eyeBean.cs" />
+    <Compile Include="src\eyeEye.cs" />
+    <Compile Include="src\eyeFlower.cs" />
+    <Compile Include="src\fence.cs" />
+    <Compile Include="src\firemine.cs" />
+    <Compile Include="src\floatMine.cs" />
+    <Compile Include="src\flowerShell.cs" />
+    <Compile Include="src\glassesSmoke.cs" />
+    <Compile Include="src\greySpring.cs" />
+    <Compile Include="src\holyHandGrenade.cs" />
+    <Compile Include="src\illuminatiSmoke.cs" />
+    <Compile Include="src\invisibleBlock.cs" />
+    <Compile Include="src\leeEnfield.cs" />
+    <Compile Include="src\LilDuck2.cs" />
+    <Compile Include="src\LilDuck.cs" />
+    <Compile Include="src\LilDuck3.cs" />
+    <Compile Include="src\lilFeather.cs" />
+    <Compile Include="src\metalCrate.cs" />
+    <Compile Include="src\metalDebris.cs" />
+    <Compile Include="src\negevGun.cs" />
+    <Compile Include="src\openCrate.cs" />
+    <Compile Include="src\openCrateWallBottom.cs" />
+    <Compile Include="src\openCrateWallR.cs" />
+    <Compile Include="src\openCrateWallL.cs" />
+    <Compile Include="src\sausageLauncher.cs" />
+    <Compile Include="src\slomoATSniper.cs" />
+    <Compile Include="src\slomoSniper.cs" />
+    <Compile Include="src\slomoSniperEjectedShell.cs" />
+    <Compile Include="src\slomoSniperShell.cs" />
+    <Compile Include="src\trolley.cs" />
+    <Compile Include="src\train.cs" />
+    <Compile Include="src\trainEjectedPin.cs" />
+    <Compile Include="src\trolleyHat.cs" />
+    <Compile Include="src\trainHat.cs" />
+    <Compile Include="src\mlgSmoke.cs" />
+    <Compile Include="src\Mod.cs" />
+    <Compile Include="src\nailPistol.cs" />
+    <Compile Include="src\nailShotgun.cs" />
+    <Compile Include="src\onion.cs" />
+    <Compile Include="src\onionPin.cs" />
+    <Compile Include="src\overShotgun.cs" />
+    <Compile Include="src\plumbus.cs" />
+    <Compile Include="src\popper.cs" />
+    <Compile Include="src\popWave.cs" />
+    <Compile Include="src\potion.cs" />
+    <Compile Include="src\potionDebris.cs" />
+    <Compile Include="src\potionSmoke.cs" />
+    <Compile Include="src\pumpBeast.cs" />
+    <Compile Include="src\radioBlock.cs" />
+    <Compile Include="src\rickGun.cs" />
+    <Compile Include="src\rollerBoots.cs" />
+    <Compile Include="src\sausage.cs" />
+    <Compile Include="src\scar.cs" />
+    <Compile Include="src\seeker.cs" />
+    <Compile Include="src\seekerMagazine.cs" />
+    <Compile Include="src\shrekSmallSmoke.cs" />
+    <Compile Include="src\shrekSmoke.cs" />
+    <Compile Include="src\shrekZooka.cs" />
+    <Compile Include="src\sledgePop.cs" />
+    <Compile Include="src\slomoAk47.cs" />
+    <Compile Include="src\slomoAT9mm.cs" />
+    <Compile Include="src\slomoATDuel.cs" />
+    <Compile Include="src\slomoATMagnum.cs" />
+    <Compile Include="src\slomoATShotgun.cs" />
+    <Compile Include="src\slomoATShrapnel.cs" />
+    <Compile Include="src\slomoDuelGun.cs" />
+    <Compile Include="src\slomoEjectedShell.cs" />
+    <Compile Include="src\slomoGrenade.cs" />
+    <Compile Include="src\slomoGun.cs" />
+    <Compile Include="src\slomoMagnum.cs" />
+    <Compile Include="src\slomoMagnumEjectedShell.cs" />
+    <Compile Include="src\slomoMagnumShell.cs" />
+    <Compile Include="src\slomoShell.cs" />
+    <Compile Include="src\slomoShotgun.cs" />
+    <Compile Include="src\slomoShotgunEjectedShell.cs" />
+    <Compile Include="src\slomoShotgunShell.cs" />
+    <Compile Include="src\spikeHelmet.cs" />
+    <Compile Include="src\streetLamp.cs" />
+    <Compile Include="src\sunflower.cs" />
+    <Compile Include="src\tec9.cs" />
+    <Compile Include="src\textGun.cs" />
+    <Compile Include="src\tinyATShrapnel.cs" />
+    <Compile Include="src\tinyShotgun.cs" />
+    <Compile Include="src\ironFence.cs" />
+    <Compile Include="src\wheat.cs" />
+    <Compile Include="src\wizardMagnum.cs" />
+    <Compile Include="src\wizardSound.cs" />
+    <Compile Include="src\wizardStaff.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

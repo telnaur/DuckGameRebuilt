@@ -1,0 +1,31 @@
+Updated guide: https://www.reddit.com/r/duckgame/comments/m7atb0/levels_categories/
+
+Please add presented Category Tags to your level file name in chronological order of appearance in this document.
+
+	Main Categories (Only one of these Tags can appear in level title):
+[] - No Main Categories means map is viable for both Teams and FFA game modes.
+[FFA] - Free For All, default gameplay style.
+[Teams] - Designed for team-play. Running these in FFA mode is not recommended for sake of grouped spawns. These also may contain CoilGun, which resurrects ducks!
+[1v3] - DeathRun or Juggernaut for example. One duck spawns with a predominance over the rest of ducks, which have to gang-up against the overpowered one to later declassify each other using what's left for them.
+[COOP] - These aren't maps for competitive play. Sometimes not for Online play also.
+These require cooperation between ducks. [COOP] Level is completed, when ducks get to the "Finish" sign.
+[CHAL] - Arcade challenges. Same rules as for [LAN] maps, but also playable ONLY in level editor or Offline Arcade thanks to EIM64's mod.
+[Other] - Unconventional maps, not necessarily fun to play.
+[JAIL] - RolePlaying map, where Police, Traitors and Prisoners compete on Ginormous size prison map. Follow the rules, and break them at most suitable moment!
+[KYS] - Map designed particularly for Killing Your Self, environmental hazards are rare, and suicide with a shotgun thrown against a spring - most creative. Regular guns would be used for careful traveling through map - careful not to hurt any ducks at range. Playing KYS maps require communication with other lobby members to redistribute their focus on their ASAP death, if you aren't subscribing to a mod that adds this as an available Game Mode.
+
+
+	Additional Categories (These Tags can stack next to each other in level title):
+[8P] - Map has enough spawns and space to accommodate up to 8 players.
+[MOD] - If map has this in title, it requires some mods. Be sure to check for them in map’s description.
+[MOON] - Map is viable for playing with Moon Gravity modifier enabled.
+[RAND] - Map contains mostly/only presents or Random Boxes. Winning round on such map depends mainly on luck.
+[LAN] - Running these in online mode will likely result in game’s crash or lack of inalienable map elements. Play these locally, offline.
+
+
+	Mods-necessary Categories (These Tags can be used instead of [MOD] Tag)
+[UFF] - Map requires only contents of UFF Mod only.
+[DWEP] - Map requires only contents of Dord's Weaponry Mod only.
+[ChaseTag] - Spawned players are separated into 2 teams: Pursuer & Chaser. Pursuer team - armed with Taser, Helmets and Fancy Boots pursue those escaping, while others make a run for shelter. It is important, that the route between start and shelter require fair amount of parkour, as this category is based of Mirror's Edge game after all. Plays best with ChaseTag Game Mode enabled, available in proper mod.
+[KYS+] - Everything from regular [KYS] Tag applies here as well, with few additions: Father team tries his best to protect Kid team members from suicide, while being immortal. When time runs out, Father team members die and Kid team members become immortal. In terms of KYS Game Mode, it means point for Father team and because this Game Modifier is necessary, it has to be played with a proper mod.
+[BS] - Stands for Bomb Site and means players are separated into teams, where one is supposed to plant the bomb and detonate it in given place, and other is defending the point or defusing what was planted. Bomb is capable of killing Defender team members, while leaving Attackers intact. Playable only with {MayhenInTheBox; Bombsite; Vaccine} items, available in proper mod.

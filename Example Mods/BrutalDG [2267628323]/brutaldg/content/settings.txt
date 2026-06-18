@@ -1,0 +1,10 @@
+don't edit
+enablegibs = true
+gibslifetime = 0.8
+gibsamount = 500
+enableblood = true
+bloodamount = 0.25
+bloodcolor = 0
+screenshake = 80
+bloodonthings = 3
+screenshaketype = 0

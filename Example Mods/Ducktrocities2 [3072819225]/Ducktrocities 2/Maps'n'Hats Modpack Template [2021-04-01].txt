@@ -1,0 +1,76 @@
+	Source: https://www.reddit.com/r/duckgame/comments/k9eyu8/how_to_make_your_own_mapsnhats_combo_modpack/
+	Maps'n'Hats Modpack Template (by erik7302 & Zloty_Diament)
+
+Maps'n'Hats Modpack, originally forked from UFF Items but it was edited beyond recognition by Erik7302 with help of Drake and an effort of Duck Game Discord community.
+
+This modpack structure simplifies the process of subscribing to: Maps, Hats/Client-side ReSkins, Mojis, Texpacks and Custom Background-Foreground Arts, and comes with my favorite guides and templates for each of mentioned. **All of that without requirement of mod being enabled at all times.**
+
+Modpack template personalization is also over-simplified, requiring no programming skills or software.
+
+Subfolders are supported, allowing for keeping large amount of content nicely cataloged. That template also cooperates with other templates of its kind for comfort of the end user - all custom contents land in mutual folders, separated by author's names.
+
+Everyone using that modpack, given that their content isn't low-effort, can message me to get added to Maps'n'Hats Modpacks Collection/Playlist on Steam: https://steamcommunity.com/sharedfiles/filedetails/?id=2284818984
+
+	Maps'n'Hats Modpack features'n'usage:
+IMPORTANT: To prevent duplicates of exceeding the limit of loaded custom content, files are copied over 1 directory deeper. It's up to end user to manually pick/rename favorite hats and move them to up to the default directory (see "Step 4").
+- 
+1. On launch, it copies custom contents into the respective folders inside of Duck Game User Data Directory, with the mod's subfolder hierarchy preserved (as long they aren't empty).
+This doesn't concern Levels, Texpacks or Custom Background-Foreground Arts, because game accesses those through in-game file browser.
+For everything else, you've gotta move files to the top of each category, else Duck Game won't load them.
+Duck Game Saves Directory can be either %USERPROFILE%\Documents\DuckGame or  %APPDATA%\Roaming\DuckGame,  depending on your game installation. You can check which of the two it  is by accessing DuckHack console in-game ("~" button on keyboard) and  typing userdir command.
+Example procedure (for Hats):
+(...)\Custom\Hats\Hat Modpacks\<ExampleAuthor>\<ExampleHat>.png --Gets copied/moved into-- (...)\Hats
+Example procedure (for Mojis):
+(...)\Custom\Mojis\Moji Modpacks\<ExampleAuthor>\<ExampleMoji>.png --Gets copied/moved into-- (...)\Mojis
+- 5) Update all Modpacks quickly (2 ways: "5a" or "5b")
+5a.1) Resubscribe all modpacks
+5a.2) Start the game with all enabled
+5a.3) Disable all mods
+
+5b.1) Juggle the "mods.conf" file to change enabled mods state quickly:
+5b.2) Create a copy of %USERPROFILE%\Documents\DuckGame\Mods\<SteamID>\mods.conf while all mods are disabled.
+5b.3) Save the copy outside of \Mods folder, rename the file to "mods --AllDisabled.conf".
+5b.4) Creates a copy of "mods --AllDisabled.conf" and rename it to "mods --AllEnabled.conf".
+5b.5) Edit the "mods --AllEnabled.conf", so between "<Disabled" and " />" there's nothing.
+5b.6) This way you can have your own presets of enabled/disabled mods, just duplicate one of created preset `.conf` files and rename back to "mods.conf", allowing overwrite action.
+For example: "mods --ItemMods", "mods --Gamechangers", (..)
+
+
+
+	How to make your own Maps'n'Hats Modpack?
+1.1) Download the template: [2021-04-01]
+2.1) Unpack the "Maps'n'Hats Modpack Template" folder into <Duck Game Saves Directory>\Mods.
+Duck Game Saves Directory can be either %USERPROFILE%\Documents\DuckGame or  %APPDATA%\Roaming\DuckGame, depending on your game installation. You can check which of the two it is by accessing DuckHack console in-game ("~" button on keyboard) and typing userdir command.
+2.2) Rename the "Maps'n'Hats Modpack Template" folder to how you want your Modpack to be named.
+3) Edit the preview images in `Maps'n'Hats\content`.
+4.1) Open `Mod.cs` preferably with "Notepad++.exe" and follow single-line instructions that start with "//". For the "Mod Title", use the same as to what you renamed the folder.
+4.2) Do not delete the top folders, that are listed as steps of this guide ("5) Levels; 7) Mojis; etc."), even if you aren't planning to use them. Keep them empty instead.
+- 5) Levels
+5.1) Copy your maps into `Maps'n'Hats\content\Levels`
+5.2) `\Levels` folder comes with my categorizing proposition, first are subfolder categories, inside them maps can be additionally cataloged by themes (Forrest, City, ...). Both levels and hats can come with .txt files to explain a complicated mechanic, or image files for thumbnails.
+- 6) Hats (also Client-side ReSkins)
+6.1) Copy your hats into `Maps'n'Hats\content\Hats`.
+6.2) The hats can be either `.png` or `.hat`, anything ranging from single 32x32 frame to full-fledged metapixel hat.
+6.3) Popular Client-side ReSkins work as disguised hats, so these also can be bundled with this modpack template {`.rsk`; `.hat` `.png`}.
+- 7) Mojis
+7.1) Copy your Mojis into `Maps'n'Hats\content\Mojis`. This can be either `.png` or `.moj`.
+7.2) Since the Duck Game [2020-10-17] Patch, arbitrary moji sub-size limit was removed, meaning custom Mojis can now be any size smaller than (56x28).
+- 8) Arcade; Background; Blocks; Parallax; Platform
+8.1) Drop your content into respective folders {.png}.
+8.2) At the time of writing, I wasn't aware of Custom Arcade Machines being supported, but I kept the support for `Arcade\` folder.
+- 9) Texpacks (Texture Packs)
+9.1) Drop your textures into `Maps'n'Hats\content\Texpacks`. This folder should be a mirror of `<where Duck Game.exe is>\Content` and so your textures filenames and subfolders should resemble it.
+9.2) Otherwise if you aren't planning to add Texpacks, delete contents of the folder.
+- 10) Open Duck Game, go to Options>Manage Mods, select your mod from the list and upload.
+- 11) Go to Duck Game's Steam Workshop, browse items you've published, edit your submission and set as public. Later you might wanna update the submission's screenshots reel with newest additions, preferably collabs of new level/hat thumbnails (or `.gif` animations).
+To add content post-publication, just copy new content into above mentioned locations and repeat step 9. Then update Steam Submission with new screenshots.
+
+
+
+Tired of subscribing to 1300 levels and creating laggy Steam playlists?
+
+Don't like maintaining your levels as separate Workshop Submissions, or your level doesn't wanna upload?
+
+Tired of not being able to play online because of a having to keep a Hat Modpack enabled?
+
+Choose to work directly with files. Create subfolders to categorize levels, or for hat collections!

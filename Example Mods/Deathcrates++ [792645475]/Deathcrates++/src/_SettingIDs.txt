@@ -1,0 +1,23 @@
+﻿FORMAT:
+INPUT (ID1/ID2/IDX) - Name
+
+--=--=--=--=--=--=--=--=--=--
+		
+0 (0/12/22)		- Banana Party
+1 (1/13/23)		- Bullet Hell
+2 (2/14/24)		- Explode Fire
+3 (3/15/25)		- Gas Fire
+4 (4/16/26)		- Grenade Party
+5 (5/17/27)		- Ion Cannon
+6 (6/18/28)		- Mine Party
+7 (7/19/29)		- Net City
+8 (8/9/30)		- Present Explosion
+9 (10/20/31)	- Roman Candle
+10 (11/21/32)	- Sword Adventure
+11 (33/34/-)	- Earthquake
+12 (35/36/-)	- Teleport
+13 (37/38/-)	- Rocket Shower
+14 (39/40/-)	- Dart Storm
+15 (41/42/-)	- Color Shift
+
+--=--=--=--=--=--=--=--=--=--
