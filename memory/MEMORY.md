@@ -1,3 +1,4 @@
 # Memory Index
 
-- [Guns & Equipment guide](guns-equipment-guide.md) — user-authored modding guide at `docs/guns-and-equipment-guide.md`
+- [Modding guide](guns-equipment-guide.md) — authoritative DGR modding docs in `docs/`: master `modding-guide.md` + item deep-dive `guns-and-equipment-guide.md`
+- [SuperDuck mod](superduck-mod.md) — the user's own content mod (`SuperDuck/`); first item Gandalf's Staff (levitate-all-other-ducks ragdoll spell)

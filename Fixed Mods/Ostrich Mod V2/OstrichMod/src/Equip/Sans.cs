@@ -65,7 +65,13 @@ namespace DuckGame.OstrichMod
                 && !duck.sliding)
             {
                 if (isServerForObject)
-                    Level.Add(new DeathBeam(new Vec2(x + offDir * 50f, y - 1800), new Vec2(offDir, y + 1800)));
+                {
+                    Vec2 beamPos = new Vec2(x + offDir * 50f, y - 1800);
+                    Vec2 beamTarget = new Vec2(0f, 3600f);
+                    if (Network.isActive)
+                        Send.Message(new NMDeathBeam(null, beamPos, beamTarget));
+                    Level.Add(new DeathBeam(beamPos, beamTarget));
+                }
                 _cooldown = 62;
              
                 SFX.Play(GetPath("SFX/drillklang"));

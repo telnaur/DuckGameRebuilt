@@ -7,6 +7,14 @@ namespace DuckGame.OstrichMod
 {
     public class ToxicSmoke : Thing
     {
+        // Declaring a StateBinding turns this into a networked Thing (Thing.isStateObject),
+        // so the gas cloud replicates to every client. SebasBook's bullets spawn the smoke
+        // from Bullet.OnHit, which the engine only runs on the firer, so without networking
+        // only the shooter ever saw it. Position is synced so the ghost lands in the right
+        // place. NOTE: spawners that run on every client (e.g. MetanosGrenade) must now gate
+        // their spawn behind isServerForObject, otherwise each client creates a duplicate ghost.
+        public StateBinding _positionStateBinding = new CompressedVec2Binding("position");
+
         public float Timer {
             get;
             set;
@@ -107,9 +115,12 @@ namespace DuckGame.OstrichMod
             //Ragdolls
             foreach(Ragdoll ragdoll in Level.CheckCircleAll<Ragdoll>(position, radius))
             {
-                if(!ducks.Contains(ragdoll._duck))
+                // A ragdoll's _duck can be null (loose/despawning parts) -> this used to
+                // NullReference below at '!duck.dead', crashing the round.
+                Duck ragDuck = ragdoll._duck;
+                if(ragDuck != null && !ducks.Contains(ragDuck))
                 {
-                    ducks.Add(ragdoll._duck);
+                    ducks.Add(ragDuck);
                 }
             }
             foreach (SmallFire with in Level.CheckCircleAll<SmallFire>(position, radius))

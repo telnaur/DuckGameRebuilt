@@ -44,13 +44,6 @@ namespace DuckGame.OstrichMod
         {
             if (_overrider || _stunTime <= 0 || _stunTarget == null)
             {
-                // Restore only if the holdable still exists and we aren't an overridden
-                // duplicate. The missing braces here used to deref a null _stunTarget.
-                if (!_overrider && _stunTarget != null)
-                {
-                    _stunTarget.gravMultiplier = 1f;
-                    _stunTarget.vMax = 8f;
-                }
                 Level.Remove(this);
                 return;
             }
@@ -65,6 +58,16 @@ namespace DuckGame.OstrichMod
             _stunTime--;
 
             base.Update();
+        }
+
+        public override void Removed()
+        {
+            if (!_overrider && _stunTarget != null)
+            {
+                _stunTarget.gravMultiplier = 1f;
+                _stunTarget.vMax = 8f;
+            }
+            base.Removed();
         }
 
     }

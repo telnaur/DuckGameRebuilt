@@ -1,5 +1,11 @@
 # Coding Guns & Equipment in Duck Game Rebuilt
 
+> **Part of the modding documentation.** This is the item-code deep dive. For the full mod
+> lifecycle — folder structure, `mod.conf`, compilation, assets, multiplayer compatibility,
+> and Steam Workshop publishing — start at the master guide:
+> [`modding-guide.md`](./modding-guide.md). Everything below applies unchanged whether your
+> items live in the engine or in a standalone mod.
+
 A practical, reference-backed guide to adding new weapons and equipment. All file/line
 references point at the actual source in this repo so you can jump straight to a working
 example. Paths are relative to the repo root.
@@ -127,6 +133,13 @@ Input → fire flows through these virtuals on `Gun`. Override the ones you need
   `Update()` via `Level.CheckLineAll<IAmADuck>(...)` between `barrelStartPos` and
   `barrelPosition`, gated on `isServerForObject` (`Sword.cs:517-534`, `758-813`). Swing
   state (`_swing`, `_hold`, stances) is all network-bound (`Sword.cs:9-15`).
+- **Spell / "cast" weapon:** override `Fire()` to run *arbitrary* logic instead of spawning
+  a bullet — the general case of `Sword`'s empty `Fire()`. This is how you make a wand/staff
+  that applies a status effect rather than dealing hitscan damage (see §12 and the worked
+  `GandalfsStaff` example). Two notes: re-check `Gun`'s own gates yourself if you don't call
+  `base.Fire()` (`loaded`, `ammo`, `_wait`), and you must still assign a **non-null
+  `_ammoType`** even if you never fire a bullet — `Gun` references it for ammo/range, so
+  reuse a cheap `AT*`.
 
 ---
 
@@ -274,17 +287,28 @@ listed explicitly with `<Compile Include="..." />` (see the huge `<ItemGroup>` s
 
 ## 8. Assets (sprites & sounds)
 
-- Sprites are referenced by **name** (`new Sprite("ak47")`, `new SpriteMap("pistol", 18, 10)`).
-  Names resolve against the packed atlas: `spriteatlas.png` + `spriteatlas_offsets.txt` at
-  the repo root. A `SpriteMap(name, w, h)` is a sheet sliced into `w×h` frames; add named
-  animations with `AddAnimation("idle", speed, loop, frames...)` (`Pistol.cs:18-21`).
-- Sounds are referenced by name through `SFX.Play("pistolFire")` / the `_fireSound` field.
+> **If your item lives in a mod, read [`modding-guide.md`](./modding-guide.md) §3.2** — it is
+> the full reference on file formats (`.png`/`.wav`/`.ogg`), `SpriteMap` animation, pink
+> transparency, `SFX.Play`, music, and `GetPath`. This section covers **engine-built** items,
+> which differ in exactly one way: how a sprite *name* resolves.
+
+- **Engine items** reference sprites by **atlas name** (`new Sprite("ak47")`,
+  `new SpriteMap("pistol", 18, 10)`), resolved against the packed atlas `spriteatlas.png` +
+  `spriteatlas_offsets.txt` at the repo root. **Mod items** reference their own PNG by path
+  via `GetPath` (no extension) — a bare name only ever hits the atlas. This is the single
+  biggest "blank sprite" gotcha when moving code from the engine into a mod.
+- A `SpriteMap(name, w, h)` slices a sheet into `w×h` frames (numbered left-to-right,
+  top-to-bottom from 0); add named animations with
+  `AddAnimation("idle", speed, looping, frames...)` (`Pistol.cs:18-21`). Same API for engine
+  and mod — only the `name` vs `GetPath` source differs.
+- Sounds: engine items use atlas/registered names (`SFX.Play("pistolFire")`, or the
+  `_fireSound` field); mod items pass a `GetPath("sounds/…")` string to the same `SFX.Play`.
+  Both must be **`.wav`**.
 - Shaders live in `shaders_source/` and are compiled by the post-build step (see the build
   pipeline notes).
 
-When adding new art, you generally need to get it into the atlas (or load via `Content`) —
-study how existing items reference their sprites and mirror that. If a sprite name doesn't
-resolve, you get a blank/placeholder rather than a crash.
+If a sprite/sound name doesn't resolve you get a blank/placeholder or silence, **not** a
+crash — which is why a typo or a missing `GetPath` fails quietly. Mirror a working item.
 
 ---
 
@@ -316,11 +340,86 @@ should block hits, configure worn collision via `_hasEquippedCollision`, and rel
 ## 11. Testing your item in multiplayer (the safe rule)
 
 Because AmmoType/Thing/NetMessage indices and the version handshake depend on the build,
-**every participant must run the byte-identical binary** when testing networked content.
-For how to host a private session for remote testers without touching Steam Workshop or
-upstream git, see the build-pipeline notes / project README. Short version: build locally,
-zip `bin/`, distribute the same zip to everyone, and host a Private Steam lobby (or use a
-VPN + LAN host). Mixing builds → version-mismatch kick or silent desync.
+**every participant must run matching content** when testing networked items. If your items
+live in a **mod** (the recommended path), this means everyone runs the same mod version —
+see [`modding-guide.md`](./modding-guide.md) §4 (multiplayer compatibility) and §7
+(distributing to testers). If instead you forked the engine, everyone must run the
+byte-identical binary: build locally, zip `bin/`, distribute the same zip, and host a
+Private Steam lobby (or VPN + LAN host). Mixing versions → version-mismatch kick or silent
+desync.
+
+---
+
+## 12. Status effects via spawned "effect Things" (stun / freeze / levitate / DoT)
+
+Many weapons don't just hit — they apply an *ongoing* effect to a target. The robust DGR
+pattern is **not** to track the effect on the weapon (the weapon gets dropped, thrown, or
+fires again), but to spawn a small dedicated `Thing` — **one per affected target** — that
+owns the effect's lifetime and is itself networked. The weapon's only job is to spawn it.
+
+Canonical in-repo examples: the Ostrich mod's `Stun.cs` / `ToyHammer.cs`
+(`Fixed Mods/Ostrich Mod V2/OstrichMod/src/`) and SuperDuck's `GandalfFloat.cs` /
+`GandalfsStaff.cs` (`SuperDuck/`).
+
+```csharp
+public class MyEffect : Thing
+{
+    Duck duck;        // the target
+    int f;            // frame timer
+    // REQUIRED for multiplayer: ghost copies are constructed parameterless, so the
+    // Duck-taking constructor never runs for them. Without binding the target (+ timer)
+    // the ghost has a null target and crashes in Update().
+    public StateBinding _frames = new StateBinding(nameof(f), -1, false, false);
+    public StateBinding _duckBinding = new StateBinding(nameof(duck));
+
+    public MyEffect(Duck d) : base(0f) { duck = d; }
+
+    public override void Initialize()
+    {
+        if (duck == null) { Level.Remove(this); return; }   // ghost-safety
+        // onset, e.g. duck.GoRagdoll(); duck.immobilized = true;
+        base.Initialize();
+    }
+
+    public override void Update()
+    {
+        if (duck == null || duck.dead) { Level.Remove(this); return; }
+        // sustain the effect; gate physics/state writes on duck.isServerForObject
+        if (++f >= DURATION) { /* restore */ Level.Remove(this); }
+        base.Update();
+    }
+}
+```
+
+**The two rules that make or break this online:**
+
+1. **Spawn the effect Things on the owner only.** Gate the `Level.Add(new MyEffect(target))`
+   loop on the weapon's `isServerForObject`. If every client spawns them you get one
+   *networked* effect Thing per client per target — a ghost flood that desyncs/crashes the
+   moment someone connects. This footgun is flagged in-code in `ToyHammer.cs`. (This is the
+   §5 authority rule applied to *spawned Things*, not just bullets/damage — easy to miss.)
+2. **Bind everything the ghost needs to reconstruct itself** (target + timer above), because
+   the meaningful constructor doesn't run for ghosts.
+
+**Finding targets.** Enumerate with `foreach (Duck d in Level.current.things[typeof(Duck)])`,
+or area queries (`Level.CheckCircleAll<Duck>`, `Level.current.CollisionLineAll<Duck>`). You
+may `Level.Add`/`Level.Remove` **during** this iteration — Level defers structural changes
+(`GoodBook.cs` removes ducks mid-loop). For a multi-frame melee swing, track already-hit
+targets in a `HashSet<Duck>` so each is affected once (`ToyHammer.cs`).
+
+**Manipulating a duck's body.** `duck.GoRagdoll()` (`Duck.cs:2615`) ragdolls a duck and is
+**idempotent** (no-op if already ragdolled), so an effect can safely call it every frame. The
+ragdoll exposes `part1/2/3` (`RagdollPart`, physics objects): write their `hSpeed`/`vSpeed`
+to push the body, and set `ragdoll._makeActive = false` each frame to stop the duck standing
+up early. To end the effect, set `_makeActive = true` — the duck's own `Update` then
+unragdolls it (`UpdateUnragdolling` → `Ragdoll.Unragdoll`, `Ragdoll.cs:400`), which also
+clears `immobilized`.
+
+> **Physics-knob gotcha (general, not just ragdolls):** before driving a physics field every
+> frame from an external effect, confirm the owner's `Update` doesn't reset it.
+> `RagdollPart.gravMultiplier` is reset to `1` every frame by `RagdollPart.Update`, so writing
+> it from outside does nothing; `extraGravMultiplier` (also a factor in `currentGravity`) is
+> **not** reset — that's the knob for sustained anti-gravity / levitation.
 
 ---
 
@@ -329,6 +428,8 @@ VPN + LAN host). Mixing builds → version-mismatch kick or silent desync.
 | Topic | File |
 |---|---|
 | Gun base (firing, reload, kick, bindings) | `src/DuckGame/Weapons/Gun.cs` |
+| Status effects / spawned effect Things | §12; `Stun.cs`, `ToyHammer.cs` (Ostrich mod), `GandalfFloat.cs` (SuperDuck) |
+| Ragdoll mechanics (parts, gravity, unragdoll) | `src/DuckGame/Stuff/Ragdoll.cs`, `RagdollPart.cs`; `Duck.GoRagdoll` (`Duck.cs:2615`) |
 | Simple gun example | `src/DuckGame/Weapons/AK47.cs`, `Pistol.cs` |
 | Thrown explosive | `src/DuckGame/Weapons/Grenade.cs` |
 | Melee (empty Fire, line-check damage) | `src/DuckGame/Weapons/Sword.cs` |

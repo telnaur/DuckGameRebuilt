@@ -107,9 +107,13 @@ namespace DuckGame.OstrichMod
             //Ragdolls
             foreach(Ragdoll ragdoll in Level.CheckCircleAll<Ragdoll>(position, radius))
             {
-                if(!ducks.Contains(ragdoll._duck))
+                // A ragdoll's _duck can be null (loose/despawning parts). With FrozenBomb
+                // spawning 150 clouds that each scan for ragdolls, this null hit reliably
+                // and NullReferenced below at '!duck.dead' -> the multiplayer crash.
+                Duck ragDuck = ragdoll._duck;
+                if(ragDuck != null && !ducks.Contains(ragDuck))
                 {
-                    ducks.Add(ragdoll._duck);
+                    ducks.Add(ragDuck);
                 }
             }
             foreach (SmallFire with in Level.CheckCircleAll<SmallFire>(position, radius))

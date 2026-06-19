@@ -12,6 +12,10 @@ namespace DuckGame.OstrichMod
       int f = 0;
       private SpriteMap _swordSwing;
       float angleAbsolute = 0;
+      // Ducks already stunned during the current swing, so each target is stunned once
+      // instead of spawning a networked Stun every frame (the per-frame ghost flood
+      // crashed online games the moment you connected).
+      private readonly HashSet<Duck> _stunned = new HashSet<Duck>();
       public StateBinding _frames = new StateBinding("f",-1,false,false);
       public StateBinding _angleAbsolute = new StateBinding("angleAbsolute",-1,false,false);
 
@@ -85,6 +89,7 @@ namespace DuckGame.OstrichMod
                  if(f == 0)
                  {
                   f += 1;
+                  _stunned.Clear();
                   SFX.Play("swipe", Rando.Float(0.8f, 1f), Rando.Float(-0.1f, 0.1f), 0f, false);
                   this._swordSwing.speed = 1f;
                   this._swordSwing.frame = 0;
@@ -96,18 +101,25 @@ namespace DuckGame.OstrichMod
                f++;
                if(f < 10)
                {
-                foreach(Duck dicko in Level.current.CollisionLineAll<Duck>(this.position, this.position + new Vec2((float)Math.Sqrt(Math.Pow(22, 2) - Math.Pow(Math.Sin(this.handAngle) * 22, 2)) * this.offDir, (float)Math.Sin(this.handAngle) * 22)))
+                // Only the weapon's authority spawns the networked Stun Things; otherwise
+                // every client floods the level with ghosts -> desync/crash online.
+                if (isServerForObject)
                 {
-                  if(!dicko.dead && dicko != this.duck)
+                  foreach(Duck dicko in Level.current.CollisionLineAll<Duck>(this.position, this.position + new Vec2((float)Math.Sqrt(Math.Pow(22, 2) - Math.Pow(Math.Sin(this.handAngle) * 22, 2)) * this.offDir, (float)Math.Sin(this.handAngle) * 22)))
                   {
-                    Level.Add(new Stun(dicko));
+                    if(!dicko.dead && dicko != this.duck && _stunned.Add(dicko))
+                    {
+                      Level.Add(new Stun(dicko));
+                    }
                   }
-                }
-                foreach(RagdollPart dicko in Level.current.CollisionLineAll<RagdollPart>(this.position, this.position + new Vec2((float)Math.Sqrt(Math.Pow(22, 2) - Math.Pow(Math.Sin(this.handAngle) * 22, 2)) * this.offDir, (float)Math.Sin(this.handAngle) * 22)))
-                {
-                  if(!dicko._doll._duck.dead && dicko._doll._duck != this.duck)
+                  foreach(RagdollPart dicko in Level.current.CollisionLineAll<RagdollPart>(this.position, this.position + new Vec2((float)Math.Sqrt(Math.Pow(22, 2) - Math.Pow(Math.Sin(this.handAngle) * 22, 2)) * this.offDir, (float)Math.Sin(this.handAngle) * 22)))
                   {
-                    Level.Add(new Stun(dicko._doll._duck));
+                    // Ragdoll parts can have a null doll/duck (loose parts, despawning) -> NRE.
+                    Duck ragDuck = dicko._doll != null ? dicko._doll._duck : null;
+                    if(ragDuck != null && !ragDuck.dead && ragDuck != this.duck && _stunned.Add(ragDuck))
+                    {
+                      Level.Add(new Stun(ragDuck));
+                    }
                   }
                 }
                 this.angleAbsolute += 0.2f;

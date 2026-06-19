@@ -52,11 +52,17 @@ namespace DuckGame.OstrichMod
             }
             if (_timeBeforeExplote <= 0)
             {
-                Level.Add(new ToxicSmoke(x, y, 9f + Rando.Float(1f)));
-                Level.Add(new ToxicSmoke(x, y + 25, 9f + Rando.Float(1f)));
-                Level.Add(new ToxicSmoke(x, y - 25, 9f + Rando.Float(1f)));
-                Level.Add(new ToxicSmoke(x + 25, y, 9f + Rando.Float(1f)));
-                Level.Add(new ToxicSmoke(x - 25, y, 9f + Rando.Float(1f)));
+                // ToxicSmoke is now networked, so only the authority may spawn it; otherwise
+                // every client would create its own set of ghosts (this Update runs on all
+                // clients). The clouds replicate from here to everyone.
+                if (isServerForObject)
+                {
+                    Level.Add(new ToxicSmoke(x, y, 9f + Rando.Float(1f)));
+                    Level.Add(new ToxicSmoke(x, y + 25, 9f + Rando.Float(1f)));
+                    Level.Add(new ToxicSmoke(x, y - 25, 9f + Rando.Float(1f)));
+                    Level.Add(new ToxicSmoke(x + 25, y, 9f + Rando.Float(1f)));
+                    Level.Add(new ToxicSmoke(x - 25, y, 9f + Rando.Float(1f)));
+                }
                 Level.Remove((this));
             }
         }

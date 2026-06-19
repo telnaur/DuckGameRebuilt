@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B07BDC3C-3770-4A07-90D8-5C2A68E2172B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DuckGame.UFFMod</RootNamespace>
+    <AssemblyName>UFFMod</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DuckGame">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Duck Game\DuckGame.exe</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Steam">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\SteamApps\common\Duck Game\Steam.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\equipment\bits\TornadoWisp.cs" />
+    <Compile Include="src\equipment\bits\Hadouken.cs" />
+    <Compile Include="src\equipment\bits\Barrier.cs" />
+    <Compile Include="src\equipment\bits\QuacktionFlash.cs" />
+    <Compile Include="src\equipment\ReaperHood.cs" />
+    <Compile Include="src\equipment\TurtleHat.cs" />
+    <Compile Include="src\equipment\Reflector.cs" />
+    <Compile Include="src\misc\Godhead.cs" />
+    <Compile Include="src\misc\hats\AHat.cs" />
+    <Compile Include="src\misc\hats\GaroHat.cs" />
+    <Compile Include="src\misc\hats\YeeHat.cs" />
+    <Compile Include="src\misc\hats\KeroHat.cs" />
+    <Compile Include="src\misc\interfaces\ISentryTarget.cs" />
+    <Compile Include="src\misc\interfaces\IAmSlippery.cs" />
+    <Compile Include="src\misc\interfaces\IBlackHoleImmunity.cs" />
+    <Compile Include="src\equipment\Earmuffs.cs" />
+    <Compile Include="src\equipment\FastGoingShoes.cs" />
+    <Compile Include="src\equipment\MegatonShoes.cs" />
+    <Compile Include="src\equipment\Headband.cs" />
+    <Compile Include="src\equipment\CowboyHat.cs" />
+    <Compile Include="src\equipment\FireShield.cs" />
+    <Compile Include="src\equipment\interfaces\IQuackOverrideEquipment.cs" />
+    <Compile Include="src\equipment\TornadoBoots.cs" />
+    <Compile Include="src\equipment\WhizzardHat.cs" />
+    <Compile Include="src\equipment\bits\WhizzardPixieDust.cs" />
+    <Compile Include="src\misc\handlers\SlipperyHandler.cs" />
+    <Compile Include="src\misc\handlers\StunHandler.cs" />
+    <Compile Include="src\misc\interfaces\IMountable.cs" />
+    <Compile Include="src\core\functions\UffFunction.cs" />
+    <Compile Include="src\core\functions\UffFunctionGive.cs" />
+    <Compile Include="src\core\functions\UffFunctionPrank.cs" />
+    <Compile Include="src\core\uiMenuActions\UIMenuActionConvertMap.cs" />
+    <Compile Include="src\core\uiMenuActions\UIMenuActionGiveItem.cs" />
+    <Compile Include="src\core\uiMenuActions\UIMenuActionPrank.cs" />
+    <Compile Include="src\core\uiMenuActions\UIMenuActionUnbind.cs" />
+    <Compile Include="src\stuff\blocks\AmmoBox.cs" />
+    <Compile Include="src\stuff\blocks\bases\BaseBox.cs" />
+    <Compile Include="src\stuff\blocks\bases\AmmoBoxReload.cs" />
+    <Compile Include="src\stuff\blocks\ConveyorBelt.cs" />
+    <Compile Include="src\stuff\blocks\Fan.cs" />
+    <Compile Include="src\stuff\blocks\ReflectorBlock.cs" />
+    <Compile Include="src\stuff\blocks\POWBlock.cs" />
+    <Compile Include="src\stuff\hazards\bits\FirebarBall.cs" />
+    <Compile Include="src\stuff\hazards\BlackHoleSpawner.cs" />
+    <Compile Include="src\stuff\hazards\Firebar.cs" />
+    <Compile Include="src\stuff\hazards\Reaper.cs" />
+    <Compile Include="src\stuff\hazards\Ghost.cs" />
+    <Compile Include="src\stuff\props\Chandelier.cs" />
+    <Compile Include="src\stuff\props\GhostLantern.cs" />
+    <Compile Include="src\stuff\props\Golduck.cs" />
+    <Compile Include="src\stuff\props\Anvil.cs" />
+    <Compile Include="src\stuff\props\bits\AltarDuckTaken.cs" />
+    <Compile Include="src\stuff\props\bits\BalloonPop.cs" />
+    <Compile Include="src\stuff\props\IceCube.cs" />
+    <Compile Include="src\stuff\props\DuckGodAltar.cs" />
+    <Compile Include="src\stuff\props\TNT.cs" />
+    <Compile Include="src\stuff\hazards\SentryTurret.cs" />
+    <Compile Include="src\core\UffMain.cs" />
+    <Compile Include="src\core\UffExtensions.cs" />
+    <Compile Include="src\core\UffMod.cs" />
+    <Compile Include="src\weapons\Ballista.cs" />
+    <Compile Include="src\weapons\bits\BilliardBall.cs" />
+    <Compile Include="src\weapons\bits\AerialMine.cs" />
+    <Compile Include="src\weapons\bits\ATArrow.cs" />
+    <Compile Include="src\weapons\bits\ATWandStar.cs" />
+    <Compile Include="src\weapons\bits\ATWorldEater.cs" />
+    <Compile Include="src\weapons\bits\BlackHole.cs" />
+    <Compile Include="src\weapons\bits\ATEMProjectile.cs" />
+    <Compile Include="src\weapons\bits\BuzzsawBlade.cs" />
+    <Compile Include="src\stuff\props\Balloon.cs" />
+    <Compile Include="src\weapons\bits\GlobalDarkpulse.cs" />
+    <Compile Include="src\weapons\bits\GlobalPulse.cs" />
+    <Compile Include="src\weapons\bits\GlobalSmoke.cs" />
+    <Compile Include="src\weapons\bits\JadeShot.cs" />
+    <Compile Include="src\weapons\bits\SerpentRebound.cs" />
+    <Compile Include="src\weapons\bits\GlobalSteam.cs" />
+    <Compile Include="src\weapons\bits\IceFlash.cs" />
+    <Compile Include="src\weapons\bits\FireSprinkle.cs" />
+    <Compile Include="src\weapons\bits\EMProjectile.cs" />
+    <Compile Include="src\weapons\bits\GlobalVaporize.cs" />
+    <Compile Include="src\weapons\bits\GlobalExplosion.cs" />
+    <Compile Include="src\weapons\bits\GenocideOrb.cs" />
+    <Compile Include="src\weapons\bits\HHGHalo.cs" />
+    <Compile Include="src\weapons\bits\IceSteam.cs" />
+    <Compile Include="src\weapons\bits\LeafblowerGust.cs" />
+    <Compile Include="src\weapons\bits\MicWave.cs" />
+    <Compile Include="src\weapons\bits\NotARealErrorHandler.cs" />
+    <Compile Include="src\weapons\bits\SerpentLaser.cs" />
+    <Compile Include="src\weapons\bits\WandPixieDust.cs" />
+    <Compile Include="src\weapons\bits\Graviton.cs" />
+    <Compile Include="src\weapons\Mortar.cs" />
+    <Compile Include="src\weapons\Bow.cs" />
+    <Compile Include="src\weapons\BuzzsawLauncher.cs" />
+    <Compile Include="src\weapons\BalloonMineLauncher.cs" />
+    <Compile Include="src\weapons\DarkMatterCube.cs" />
+    <Compile Include="src\weapons\ImpulseGrenade.cs" />
+    <Compile Include="src\weapons\PortableTeleporter.cs" />
+    <Compile Include="src\weapons\SixShooter.cs" />
+    <Compile Include="src\weapons\ConcussionGrenade.cs" />
+    <Compile Include="src\weapons\JadeEmperor.cs" />
+    <Compile Include="src\weapons\FAMAS.cs" />
+    <Compile Include="src\weapons\PlasmaThruster.cs" />
+    <Compile Include="src\weapons\FreezeRay.cs" />
+    <Compile Include="src\weapons\FireWand.cs" />
+    <Compile Include="src\weapons\ERRNULL.cs" />
+    <Compile Include="src\weapons\GravityGun.cs" />
+    <Compile Include="src\weapons\HolyHandGrenade.cs" />
+    <Compile Include="src\weapons\ChicagoTypewriter.cs" />
+    <Compile Include="src\weapons\Jormungandr.cs" />
+    <Compile Include="src\weapons\Mickey.cs" />
+    <Compile Include="src\weapons\Railgun.cs" />
+    <Compile Include="src\weapons\HandOfMidas.cs" />
+    <Compile Include="src\weapons\Spear.cs" />
+    <Compile Include="src\weapons\Genocide.cs" />
+    <Compile Include="src\weapons\Leafblower.cs" />
+    <Compile Include="src\weapons\TrollBomb.cs" />
+    <Compile Include="src\weapons\Wand.cs" />
+    <Compile Include="src\weapons\CrateStrike.cs" />
+    <Compile Include="src\weapons\Crossbow.cs" />
+    <Compile Include="src\weapons\DORILLU.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

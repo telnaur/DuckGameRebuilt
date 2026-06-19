@@ -15,7 +15,7 @@ namespace DuckGame.OstrichMod
         public RainShield(float xval, float yval) : base(xval, yval)
         {
             this._editorName = "RainShield";
-            this.ammo = 200;
+            this.ammo = 120;
             this._ammoType = (AmmoType)new ATShrapnel();
             this._fullAuto = false;
             this.sprite = new SpriteMap(Mod.GetPath<DuckGame.OstrichMod.OstrichMod>("Shield"),19, 19);

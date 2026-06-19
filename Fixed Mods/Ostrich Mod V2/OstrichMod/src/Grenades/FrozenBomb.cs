@@ -52,13 +52,20 @@ namespace DuckGame.OstrichMod
             }
             if (_timeBeforeExplote <= 0)
             {
-                for (int i = 0; i < 30; i++)
+                // Only the authority spawns; IceCloud has a position StateBinding so
+                // ghosts replicate to remote clients. The old code (30 × 5 = 150 clouds
+                // with no server gate) let every client independently create 150 objects,
+                // causing the memory/collision-check overrun.
+                if (isServerForObject)
                 {
-                    Level.Add(new IceCloud(x, y, 2.5f + Rando.Float(1f)));
-                    Level.Add(new IceCloud(x, y + 25, 2.5f + Rando.Float(1f)));
-                    Level.Add(new IceCloud(x, y - 25, 2.5f + Rando.Float(1f)));
-                    Level.Add(new IceCloud(x + 25, y, 2.5f + Rando.Float(1f)));
-                    Level.Add(new IceCloud(x - 25, y, 2.5f + Rando.Float(1f)));
+                    for (int i = 0; i < 4; i++)
+                    {
+                        Level.Add(new IceCloud(x, y, 2.5f + Rando.Float(1f)));
+                        Level.Add(new IceCloud(x, y + 25, 2.5f + Rando.Float(1f)));
+                        Level.Add(new IceCloud(x, y - 25, 2.5f + Rando.Float(1f)));
+                        Level.Add(new IceCloud(x + 25, y, 2.5f + Rando.Float(1f)));
+                        Level.Add(new IceCloud(x - 25, y, 2.5f + Rando.Float(1f)));
+                    }
                 }
                 Level.Remove((this));
             }

@@ -15,7 +15,7 @@ namespace DuckGame.OstrichMod
         public Altimitron(float xval, float yval) : base(xval, yval)
         {
             this._editorName = "Altimitron";
-            this.ammo = 999;
+            this.ammo = 99;
             this._ammoType = (AmmoType)new ATMin();
             this._fullAuto = false;
             this.sprite = new SpriteMap(Mod.GetPath<DuckGame.OstrichMod.OstrichMod>("Altimitron"),30, 12);

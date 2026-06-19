@@ -81,5 +81,21 @@ namespace DuckGame.OstrichMod
                 Graphics.Draw(swirl, position.x, position.y);
             base.Draw();
         }
+
+        public override void Removed()
+        {
+            // Called both when the server's Zawarudo removes itself and when the
+            // network manager removes the ghost on remote clients. Without this,
+            // remote clients' ducks stay permanently immobilized/frozen because
+            // the cleanup in Update() is never reached via the ghost removal path.
+            if (!_overrider && _stunTarget != null)
+            {
+                _stunTarget.immobilized = false;
+                _stunTarget.gravMultiplier = 1f;
+                _stunTarget.vMax = 8f;
+            }
+            Layer.Blocks.colorMul = new Vec3(1f, 1f, 1f);
+            base.Removed();
+        }
     }
 }

@@ -70,5 +70,12 @@ namespace DuckGame.OstrichMod
                 Graphics.Draw(swirl, position.x, position.y);
             base.Draw();
         }
+
+        public override void Removed()
+        {
+            if (!_overrider && _stunTarget != null)
+                _stunTarget.immobilized = false;
+            base.Removed();
+        }
     }
 }
