@@ -4,7 +4,7 @@ using DuckGame;
 // Mod display metadata is read off these assembly attributes (NOT mod.conf).
 // See docs/modding-guide.md §2.4.
 [assembly: AssemblyTitle("SuperDuck")]
-[assembly: AssemblyDescription("Magical guns and equipment for ducks. First spell: Gandalf's Staff.")]
+[assembly: AssemblyDescription("Magical guns and equipment for ducks. Gandalf's Staff, Balrog's Whip, and more.")]
 [assembly: AssemblyCompany("David Wood")]
 [assembly: AssemblyVersion("1.0.0.0")]
 

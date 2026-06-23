@@ -67,59 +67,65 @@ namespace DuckGame.OstrichMod
 		{
 			if (this.owner != null)
 			{
-				float num = this.angle + ((this.offDir < 0) ? 3.14159274f : 0f);
-				foreach (PhysicsObject current in Level.CheckCircleAll<PhysicsObject>(this.Offset(base.barrelOffset) + 80f * new Vec2((float)Math.Cos((double)num), (float)Math.Sin((double)num)), 80))
+				// Only the authority searches for targets and drives the charge timer.
+				// Non-authority clients follow the synced StateBinding values and render
+				// the beam via Draw() — they must not reset _chargeTimer or _charging.
+				if (isServerForObject)
 				{
-					if (current != this && current != this.owner && current.owner == null && current.solid && current.thickness > 0.4f && !(current is Holdable) && !(current is Duck) && !(current is Equipment) && !(current is Gun) && (current is IPlatform || (current.collisionSize.length <= 256f && current.collisionSize.x <= 26f && current.collisionSize.y <= 26f)) && Level.CheckLine<Block>(this.Offset(base.barrelOffset), current.position, current) == null && (this._target == null || (this.Offset(base.barrelOffset) - current.position).length < (this.Offset(base.barrelOffset) - this._target.position).length))
+					float num = this.angle + ((this.offDir < 0) ? 3.14159274f : 0f);
+					foreach (PhysicsObject current in Level.CheckCircleAll<PhysicsObject>(this.Offset(base.barrelOffset) + 80f * new Vec2((float)Math.Cos((double)num), (float)Math.Sin((double)num)), 80))
 					{
-						this._target = current;
-					}
-				}
-				if (this._target != null)
-				{
-					if (!Level.CheckCircleAll<PhysicsObject>(this.Offset(base.barrelOffset) + 135f * new Vec2((float)Math.Cos((double)num), (float)Math.Sin((double)num)), 135f).Contains(this._target) || Level.CheckLine<Block>(this.Offset(base.barrelOffset), this._target.position, this._target) != null)
-					{
-						this._target = null;
-						this._chargeTimer = 0;
-					}
-					else if (this._chargeTimer >= 0 && !this._coolingDown)
-					{
-						if (this._charging)
+						if (current != this && current != this.owner && current.owner == null && current.solid && current.thickness > 0.4f && !(current is Holdable) && !(current is Duck) && !(current is Equipment) && !(current is Gun) && (current is IPlatform || (current.collisionSize.length <= 256f && current.collisionSize.x <= 26f && current.collisionSize.y <= 26f)) && Level.CheckLine<Block>(this.Offset(base.barrelOffset), current.position, current) == null && (this._target == null || (this.Offset(base.barrelOffset) - current.position).length < (this.Offset(base.barrelOffset) - this._target.position).length))
 						{
-							if (this._chargeTimer < 20)
+							this._target = current;
+						}
+					}
+					if (this._target != null)
+					{
+						if (!Level.CheckCircleAll<PhysicsObject>(this.Offset(base.barrelOffset) + 135f * new Vec2((float)Math.Cos((double)num), (float)Math.Sin((double)num)), 135f).Contains(this._target) || Level.CheckLine<Block>(this.Offset(base.barrelOffset), this._target.position, this._target) != null)
+						{
+							this._target = null;
+							this._chargeTimer = 0;
+						}
+						else if (this._chargeTimer >= 0 && !this._coolingDown)
+						{
+							if (this._charging)
 							{
-								this._chargeTimer++;
-							}
-							else
-							{
-								if (base.isServerForObject)
+								if (this._chargeTimer < 20)
+								{
+									this._chargeTimer++;
+								}
+								else
 								{
 									this.netSFX_medusa.Play(0.6f, 0f);
 									this._drawPosition = this._target.position;
 									this.Metamorphosis(this._target);
 									this._target = null;
+									this._coolingDown = true;
+									this._chargeTimer = 0;
 								}
-								this._coolingDown = true;
+							}
+							else
+							{
 								this._chargeTimer = 0;
 							}
 						}
-						else
-						{
-							this._chargeTimer = 0;
-						}
 					}
-				}
-				else
-				{
-					this._chargeTimer = 0;
+					else
+					{
+						this._chargeTimer = 0;
+					}
 				}
 			}
 			else
 			{
-				this._charging = false;
-				if (this._chargeTimer > 0)
+				if (isServerForObject)
 				{
-					this._chargeTimer = 0;
+					this._charging = false;
+					if (this._chargeTimer > 0)
+					{
+						this._chargeTimer = 0;
+					}
 				}
 			}
 			if (this._coolingDown)
@@ -146,15 +152,16 @@ namespace DuckGame.OstrichMod
 
 		public override void OnReleaseAction()
 		{
+			if (!isServerForObject)
+				return;
 			this._charging = false;
 		}
 
 		public override void OnPressAction()
 		{
-			if (this.owner != null)
-			{
-				this._charging = true;
-			}
+			if (this.owner == null || !isServerForObject)
+				return;
+			this._charging = true;
 		}
 
 		public override void Fire()

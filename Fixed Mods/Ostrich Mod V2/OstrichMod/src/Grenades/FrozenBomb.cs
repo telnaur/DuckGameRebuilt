@@ -10,6 +10,9 @@ namespace DuckGame.OstrichMod
     class FrozenBomb : Gun
     {
         public StateBinding _timeBeforeExploteStateBinding = new StateBinding("_timeBeforeExplote");
+        // pin must be networked so ghost clients transition from pin=true to pin=false
+        // and trigger their local IceCloud spawn when the countdown expires.
+        public StateBinding _pinStateBinding = new StateBinding("pin");
         public int _timeBeforeExplote;
         public bool pin = true;
         private SpriteMap _sprite;
@@ -52,20 +55,17 @@ namespace DuckGame.OstrichMod
             }
             if (_timeBeforeExplote <= 0)
             {
-                // Only the authority spawns; IceCloud has a position StateBinding so
-                // ghosts replicate to remote clients. The old code (30 × 5 = 150 clouds
-                // with no server gate) let every client independently create 150 objects,
-                // causing the memory/collision-check overrun.
-                if (isServerForObject)
+                // Every client creates its own local IceClouds for the visual effect.
+                // pin is now a StateBinding so ghost clients also see pin=false and reach
+                // this path. Game-state effects (duck slowing, IceBlock creation) are
+                // gated by isServerForObject inside IceCloud.ToxicOnDucks().
+                for (int i = 0; i < 4; i++)
                 {
-                    for (int i = 0; i < 4; i++)
-                    {
-                        Level.Add(new IceCloud(x, y, 2.5f + Rando.Float(1f)));
-                        Level.Add(new IceCloud(x, y + 25, 2.5f + Rando.Float(1f)));
-                        Level.Add(new IceCloud(x, y - 25, 2.5f + Rando.Float(1f)));
-                        Level.Add(new IceCloud(x + 25, y, 2.5f + Rando.Float(1f)));
-                        Level.Add(new IceCloud(x - 25, y, 2.5f + Rando.Float(1f)));
-                    }
+                    Level.Add(new IceCloud(x, y, 2.5f + Rando.Float(1f)));
+                    Level.Add(new IceCloud(x, y + 25, 2.5f + Rando.Float(1f)));
+                    Level.Add(new IceCloud(x, y - 25, 2.5f + Rando.Float(1f)));
+                    Level.Add(new IceCloud(x + 25, y, 2.5f + Rando.Float(1f)));
+                    Level.Add(new IceCloud(x - 25, y, 2.5f + Rando.Float(1f)));
                 }
                 Level.Remove((this));
             }

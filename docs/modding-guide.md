@@ -50,6 +50,20 @@ DGR compiles each mod from source when the game launches:
 - Exactly **one** `AssemblyInfo.cs` is allowed; extra ones are filtered out during compile
   (`ModLoader.cs:839-853`).
 
+> ⚠️ **Mod source is limited to C# 5 on Windows.** The Windows path compiles with the
+> legacy `CSharpCodeProvider` (CodeDom, `ModLoader.cs:752`), which is the in-box .NET
+> Framework `csc` — it maxes out at **C# 5**. Modern features fail to compile with errors
+> like *"The name 'nameof' does not exist in the current context."* Avoid in mod code:
+> `nameof` (use a string literal — relevant for every `StateBinding`/`new StateBinding("field")`),
+> string interpolation `$"..."`, null-conditional `?.`/`?[]`, expression-bodied members/
+> properties, auto-property initializers, `using static`, exception filters, etc. Safe to
+> use: `var`, lambdas, LINQ, generics, `async`/`await`, optional/named args (all ≤ C# 5).
+> Note this is a **platform split**: Linux compiles the same source with Roslyn
+> (`LinuxAttemptCompile`), which accepts modern C#, so a mod that builds on Linux can still
+> fail on Windows. The engine itself is unaffected — it builds via MSBuild at `LangVersion 9.0`;
+> the limit applies only to mod `.cs` compiled at runtime. (Shipping a prebuilt DLL — see
+> below — sidesteps this entirely, since you compile it yourself with full tooling.)
+
 > **Alternative — ship a prebuilt DLL.** Set `<NoCompilation>true</NoCompilation>` in
 > `mod.conf` (`ModConfiguration.cs:278`) and place a compiled `<name>.dll` in the folder.
 > The game then loads the DLL directly and never compiles source. Use this if you want to
@@ -322,6 +336,57 @@ mod**. Once published, Steam Workshop subscription handles this automatically (a
 loader can require server mods on clients, `ModLoader.cs:1203-1213`). During development,
 re-share your folder after any change to a `Thing`/`AmmoType`/`NetMessage`.
 
+### 4.1 Maps that use mod items won't appear online until the mod is on the Workshop
+
+A separate, easy-to-miss restriction applies to **custom levels** that contain modded
+Things. When you save a level in the editor, it records which mod each placed Thing belongs
+to (`Editor.cs:4600-4644`):
+
+- If the mod has a **Workshop ID**, the level stores it in `modData.workshopIDs`.
+- If the mod has **no Workshop ID** (a purely *local* mod), the level is flagged
+  `modData.hasLocalMods = true`.
+
+The **online** level-select filter (`LSFilterMods.cs:34-48`) then drops any level where:
+
+- `hasLocalMods == true` (unless `-moddebug`/`modDebugging` is on, `:36`), **or**
+- the level's `workshopIDs` aren't all installed/accessible to you (`:46`).
+
+This filter only runs for online (`if (_isOnline)`), so such maps **still show in the editor
+and offline play but vanish from the online lobby list** — a confusing symptom with a simple
+cause. (A local mod also makes the level's own `metaData.online` flag moot; the mod filter
+is the gate.)
+
+**To get a modded map online:**
+- **For shipping:** publish the mod to the Workshop (§6). It gets a Workshop ID, the level
+  records `workshopIDs`, and the map appears for anyone subscribed.
+- **For local testing:** enable `DGRSettings.IgnoreLevRestrictions` — exposed in Options as
+  the **"Fast Level loading"** toggle (`Options.cs:778`) — which bypasses *all* lev filters
+  (`LSFilterMods.cs:23`). `-moddebug` only bypasses the `hasLocalMods` branch, **not** the
+  workshop-subset branch, so it rescues local-mod maps but not maps that reference a Workshop
+  mod you don't have installed. `IgnoreLevRestrictions` is the complete switch.
+
+### 4.2 Mod objects need identical mod sets on every player — even when they connect
+
+Networked Things are assigned a **ghost-type ID by their position in the
+`FullName`-sorted list of all Thing types** (engine + mods combined, `Editor.cs:5381-5398`,
+starting at 2). The compatibility hash that gates joining (`thingTypesHash`) is built **only
+from engine-assembly types** (`:5393`) — mod types are *not* in it. Consequences:
+
+- Two players can pass the join check (engine hashes match) yet have **different ghost-type
+  IDs for mod Things** if their mod sets differ at all — a different extra mod, a different
+  mod version that adds/removes a type, or a local mod that compiled differently.
+- When that happens, a placed mod object can fail to replicate: the client instantiates the
+  wrong type for that ghost ID, or none — so **the object silently doesn't appear online**,
+  even though the rest of the map loads fine.
+- A player whose copy of your local mod **failed to compile** (e.g. a stale pre-fix copy —
+  see the C# 5 limit in §1.1) has *none* of your mod's types, so every one of your mod's
+  placed objects is missing for them. "Both have the mod installed" is not enough — both must
+  have the **same source that actually compiled**, plus the same other mods.
+
+**So when a modded object is missing online but the map otherwise works:** confirm both
+players have byte-identical copies of every local mod, that each mod compiled cleanly (check
+each machine's `<name>_build.log`), and that neither side has extra/different mods loaded.
+
 ---
 
 ## 5. Build & test locally
@@ -411,10 +476,13 @@ re-distribute after each change.
 |---|---|---|
 | Mod doesn't appear | No non-abstract `Mod` subclass | Add `public class X : Mod` (`ModLoader.cs:631`) |
 | Compile fails silently | Source error | Read `<name>_build.log`; launch with `-moddebug` |
+| `'nameof' does not exist` / modern-C# errors (Windows) | Mod compiles at C# 5 via CodeDom (§1.1) | Use string literals/older syntax; or ship a prebuilt DLL |
 | Item not in editor | Missing `[EditorGroup]` | Tag the class (`EditorGroupAttribute.cs`) |
 | Sprite is blank | Bare name instead of path | Use `GetPath("…")` for mod assets (§3.2) |
 | Mod auto-disabled in DG | Missing revision tag | `<MajorSupportedRevision>1</MajorSupportedRevision>` |
 | Multiplayer desync / version kick | Mismatched mod versions | All players on identical mod (§4) |
+| Modded map missing from online lobby (shows in editor) | Map uses a local (non-Workshop) mod → `hasLocalMods` | Publish mod to Workshop, or enable "Fast Level loading" / `IgnoreLevRestrictions` (§4.1) |
+| Placed mod object missing online, rest of map fine | Mod sets differ across players → ghost-type IDs misaligned (or a player's mod didn't compile) | Identical local-mod copies + clean compile on every machine (§4.2) |
 | NetMessage crash on connect | No empty constructor | Add `public MyMsg() {}` (`Network.cs:445`) |
 | Stale behavior after edit | Cached compiled DLL | Delete `<name>_compiled.dll`/`.hash` |
 

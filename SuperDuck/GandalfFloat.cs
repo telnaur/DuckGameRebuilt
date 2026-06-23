@@ -18,10 +18,12 @@ namespace DuckGame.SuperDuck
         private Ragdoll Rag;
         private int f;
 
-        public StateBinding _frames = new StateBinding(nameof(f), -1, false, false);
-        // Without this, ghost copies on remote clients have a null target (the Duck-taking
-        // constructor never runs for ghosts) and crash in Update. See Stun.cs.
-        public StateBinding _duckStateBinding = new StateBinding(nameof(duck));
+        // NOTE: string literals, not nameof() — DGR compiles mods at runtime with the legacy
+        // CodeDom C# compiler (C# 5 max), so nameof/string-interpolation/etc. won't compile.
+        public StateBinding _frames = new StateBinding("f", -1, false, false);
+        // Without this, ghost copies on remote clients have a null duck (the Duck-taking
+        // constructor never runs for ghosts) and remove themselves in Initialize(). See Stun.cs.
+        public StateBinding _duckStateBinding = new StateBinding("duck");
 
         public GandalfFloat(Duck duck)
             : base(0f)
@@ -31,31 +33,40 @@ namespace DuckGame.SuperDuck
 
         public override void Initialize()
         {
-            if (duck == null)
+            // On ghost clients, StateBindings (including duck) are not populated until after
+            // Initialize() returns. If duck is null here we fall through; Update() will start
+            // the float on the first frame the StateBinding arrives. Never call Level.Remove
+            // here for null duck — that silently kills the ghost before it can do anything.
+            if (duck != null)
             {
-                Level.Remove(this);
-                return;
+                duck.GoRagdoll();
+                Rag = duck.ragdoll;
+                MakeWeightless();
             }
-
-            duck.immobilized = true;
-            duck.GoRagdoll();
-            Rag = duck.ragdoll;
-            MakeWeightless();
             base.Initialize();
         }
 
         public override void Update()
         {
-            // Target can be null on a ghost before sync, or after the duck despawns.
-            if (duck == null || duck.dead)
+            if (duck == null)
             {
-                Restore();
+                // Ghost client: duck StateBinding hasn't arrived yet. The server always has
+                // duck set (constructor ran), so if we're the authority and duck is null
+                // something genuinely went wrong — bail out.
+                if (isServerForObject)
+                    Level.Remove(this);
+                return;
+            }
+
+            if (duck.dead)
+            {
                 Level.Remove(this);
                 return;
             }
 
             // Keep the duck ragdolled for the duration. GoRagdoll() is a no-op if already
             // ragdolled, and clearing _makeActive stops the duck from standing back up early.
+            // Also handles the ghost-path first-frame where Initialize() saw null duck.
             duck.GoRagdoll();
             if (Rag == null)
                 Rag = duck.ragdoll;
@@ -69,12 +80,17 @@ namespace DuckGame.SuperDuck
 
             f++;
             if (f >= DurationFrames)
-            {
-                Restore();
                 Level.Remove(this);
-            }
 
             base.Update();
+        }
+
+        public override void Removed()
+        {
+            // Runs on ALL clients (including when the network manager removes the ghost),
+            // so this is the only reliable place to undo the float effect everywhere.
+            Restore();
+            base.Removed();
         }
 
         // Cancel gravity on the ragdoll parts so they hang weightless instead of falling.

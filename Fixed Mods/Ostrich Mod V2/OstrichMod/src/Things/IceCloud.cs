@@ -92,6 +92,12 @@ namespace DuckGame.OstrichMod
 
         public virtual void ToxicOnDucks()
         {
+            // All clients render the cloud visually but only the server applies game effects.
+            // Each client creates its own local IceCloud instances (not ghosts), so without
+            // this gate every client would independently slow ducks and create IceBlocks.
+            if (!isServerForObject)
+                return;
+
             List<Duck> ducks = new List<Duck>();
             float radius = xscale * 10f;
 
@@ -107,9 +113,6 @@ namespace DuckGame.OstrichMod
             //Ragdolls
             foreach(Ragdoll ragdoll in Level.CheckCircleAll<Ragdoll>(position, radius))
             {
-                // A ragdoll's _duck can be null (loose/despawning parts). With FrozenBomb
-                // spawning 150 clouds that each scan for ragdolls, this null hit reliably
-                // and NullReferenced below at '!duck.dead' -> the multiplayer crash.
                 Duck ragDuck = ragdoll._duck;
                 if(ragDuck != null && !ducks.Contains(ragDuck))
                 {

@@ -68,6 +68,10 @@ namespace DuckGame.OstrichMod
             if (isServerForObject && alpha >= 0.6f)
                 foreach (MaterialThing materialThing in Level.CheckCircleAll<MaterialThing>(position, 151f))
                 {
+                    // Never freeze the duck who activated the hat.
+                    if (materialThing == _theDuck)
+                        continue;
+
                     // Stun each target only once per wave (prevents the per-frame spawn flood).
                     if (!_alreadyHit.Add(materialThing))
                         continue;
